@@ -45,7 +45,7 @@ The component can also be used in block form, if you pass it a template:
     {{one-way-input
         name="query" 
         type="text" 
-        placeholder="Search for...
+        placeholder="Search for..."
         update=(action "search" target=hypersearch)
     }}
     <ul>
