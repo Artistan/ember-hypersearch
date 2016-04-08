@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import layout from '../templates/components/hyper-search';
-
 const {
   Component,
   A: emberArray,
@@ -155,16 +154,15 @@ export default Component.extend({
 
     let nextIndex = increment === 1 ? 0 : maxIndex;
     let limit     = increment === 1 ? maxIndex : 0;
-
     // Object.prototype.toString.call(function () {}); // [object Function]
-    if ( Object.prototype.toString.call(results.any) === '[object Function]' ) {
+    if (Object.prototype.toString.call(results.any) === '[object Function]') {
       results.any((result, i) => {
         if (get(result, 'isHighlighted')) {
           nextIndex = i === limit ? null : i + increment;
           return true;
         }
       });
-      if ( Object.prototype.toString.call(results.objectAt) === '[object Function]' ) {
+      if (Object.prototype.toString.call(results.objectAt) === '[object Function]') {
         return results.objectAt(nextIndex);
       }
     }
