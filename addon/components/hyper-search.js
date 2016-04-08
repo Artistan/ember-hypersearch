@@ -154,7 +154,6 @@ export default Component.extend({
 
     let nextIndex = increment === 1 ? 0 : maxIndex;
     let limit     = increment === 1 ? maxIndex : 0;
-    // Object.prototype.toString.call(function () {}); // [object Function]
     if (Object.prototype.toString.call(results.any) === '[object Function]') {
       results.any((result, i) => {
         if (get(result, 'isHighlighted')) {
@@ -168,18 +167,19 @@ export default Component.extend({
     }
     return {};
   },
-
   highlightResult(resultToHighlight) {
     if (!resultToHighlight) {
       return;
     }
-
-    get(this, 'results').any((result) => {
-      if (get(result, 'isHighlighted')) {
-        set(result, 'isHighlighted', false);
-        return true;
-      }
-    });
+    let results = get(this, 'results');
+    if (Object.prototype.toString.call(results.any) === '[object Function]') {
+      results.any((result) => {
+        if (get(result, 'isHighlighted')) {
+          set(result, 'isHighlighted', false);
+          return true;
+        }
+      });
+    }
 
     set(resultToHighlight, 'isHighlighted', true);
   },
