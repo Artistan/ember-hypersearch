@@ -27,10 +27,22 @@ test('#requestAndCache caches queries and their results', function(assert) {
   sandbox.stub(component, 'request', resolve);
 
   return component.requestAndCache('foo')
-    .then((results) => {
-      assert.equal(results, 'foo', 'should return results');
-      assert.equal(get(component, '_cache.foo'), 'foo', 'should return and cache results');
-    });
+          .then((results) => {
+            assert.equal(results, 'foo', 'should return results');
+            assert.equal(get(component, '_cache.foo'), 'foo', 'should return and cache results');
+          });
+});
+
+test('#requestAndCache caches queries with periods', function(assert) {
+  const component = this.subject({ endpoint: '/' });
+  // no need to actually do an ajax request
+  sandbox.stub(component, 'request', resolve);
+
+  return component.requestAndCache('pizza@party.com')
+          .then((results) => {
+            assert.equal(results, 'pizza@party.com', 'should return results');
+            assert.equal(get(component, '_cache.pizza@party-com'), 'pizza@party.com', 'should return and cache results');
+          });
 });
 
 test('#removeFromCache removes a result from the cache', function(assert) {
@@ -43,6 +55,20 @@ test('#removeFromCache removes a result from the cache', function(assert) {
       poo: '💩'
     });
     component.removeFromCache('foo');
+    assert.deepEqual(get(component, '_cache'), expectedResult, 'should remove the cached result');
+  });
+});
+
+test('#removeFromCache removes a result with period from cache', function(assert) {
+  const expectedResult = { poo: '💩' };
+  const component = this.subject({ endpoint: '/' });
+
+  run(() => {
+    component.set('_cache', {
+      'foo-zle': 'foo',
+      poo: '💩'
+    });
+    component.removeFromCache('foo.zle');
     assert.deepEqual(get(component, '_cache'), expectedResult, 'should remove the cached result');
   });
 });
