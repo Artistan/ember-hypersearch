@@ -156,14 +156,17 @@ export default Component.extend({
     let nextIndex = increment === 1 ? 0 : maxIndex;
     let limit     = increment === 1 ? maxIndex : 0;
 
-    results.any((result, i) => {
-      if (get(result, 'isHighlighted')) {
-        nextIndex = i === limit ? null : i + increment;
-        return true;
-      }
-    });
+    if(results || typeof results.any !== 'undefined'){
+      results.any((result, i) => {
+        if (get(result, 'isHighlighted')) {
+          nextIndex = i === limit ? null : i + increment;
+          return true;
+        }
+      });
 
-    return results.objectAt(nextIndex);
+      return results.objectAt(nextIndex);
+    }
+    return {};
   },
 
   highlightResult(resultToHighlight) {
