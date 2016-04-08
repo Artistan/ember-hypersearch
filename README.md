@@ -1,9 +1,9 @@
-# ember-hypersearch :dash:
+# ember-hypersearcher :dash:
 *Hyperspeed real-time search with caching*
 
-[![npm version](https://badge.fury.io/js/ember-hypersearch.svg)](https://badge.fury.io/js/ember-hypersearch) [![Build Status](https://travis-ci.org/Artistan/ember-hypersearch.svg?branch=develop)](https://travis-ci.org/Artistan/ember-hypersearch)
+[![npm version](https://badge.fury.io/js/ember-hypersearcher.svg)](https://badge.fury.io/js/ember-hypersearcher) [![Build Status](https://travis-ci.org/Artistan/ember-hypersearcher.svg?branch=develop)](https://travis-ci.org/Artistan/ember-hypersearcher)
 
-Existing addons that implement real-time typeahead search assume that your app already has all the data. `ember-hypersearch` lets you query an endpoint directly, and caches results locally for better performance when the same query is repeated.
+Existing addons that implement real-time typeahead search assume that your app already has all the data. `ember-hypersearcher` lets you query an endpoint directly, and caches results locally for better performance when the same query is repeated.
 
 If you provide the addon with data, it will use that directly and does fuzzy search to find the item.
 
@@ -11,14 +11,14 @@ If you provide the addon with data, it will use that directly and does fuzzy sea
 
 This addon is tested to work with Ember versions `1.13.x` and up. For versions < `2.0`, you will need to install the excellent `ember-get-helper` addon as well.
 
-Because native `inputs` are used in this addon, you will need to provide your own template in order to use it on pre-Glimmer versions of Ember (basically anything below `1.13.x`). As this makes for poor testing ergonomics, we do not explicitly test for backwards compatibility please report any issues you might encounter to our [issue tracker](https://www.github.com/Artistan/ember-hypersearch/issues).
+Because native `inputs` are used in this addon, you will need to provide your own template in order to use it on pre-Glimmer versions of Ember (basically anything below `1.13.x`). As this makes for poor testing ergonomics, we do not explicitly test for backwards compatibility please report any issues you might encounter to our [issue tracker](https://www.github.com/Artistan/ember-hypersearcher/issues).
 
 ## Usage
 
 First, install the addon:
 
 ```sh
-$ ember install ember-hypersearch
+$ ember install ember-hypersearcher
 ```
 
 Then include the `hyper-search` component in a template of your choice:
@@ -87,7 +87,7 @@ The URL for your endpoint. By default, `hyper-search` will do a simple `GET` req
 If your endpoint requires a different setup, you should reopen/extend the component and override the `request` method. For example:
 
 ```js
-import HyperSearch from 'ember-hypersearch';
+import HyperSearch from 'ember-hypersearcher';
 
 export default HyperSearch.reopen({
   request(query) {
