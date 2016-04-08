@@ -156,15 +156,17 @@ export default Component.extend({
     let nextIndex = increment === 1 ? 0 : maxIndex;
     let limit     = increment === 1 ? maxIndex : 0;
 
-    if (results || typeof results.any !== 'undefined') {
+    // Object.prototype.toString.call(function () {}); // [object Function]
+    if ( Object.prototype.toString.call(results.any) === '[object Function]' ) {
       results.any((result, i) => {
         if (get(result, 'isHighlighted')) {
           nextIndex = i === limit ? null : i + increment;
           return true;
         }
       });
-
-      return results.objectAt(nextIndex);
+      if ( Object.prototype.toString.call(results.objectAt) === '[object Function]' ) {
+        return results.objectAt(nextIndex);
+      }
     }
     return {};
   },
