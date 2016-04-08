@@ -1,1 +1,1 @@
-export { default } from 'ember-hypersearch/components/hypersearch-input';
+export { default } from 'ember-hypersearcher/components/hypersearch-input';
