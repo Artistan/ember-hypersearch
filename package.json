@@ -1,6 +1,6 @@
 {
   "name": "ember-hypersearch",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Hyperspeed real-time search with caching",
   "directories": {
     "doc": "doc",
@@ -11,9 +11,9 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "https://github.com/poteto/ember-hypersearch",
-  "bugs": "https://github.com/poteto/ember-hypersearch/issues",
-  "homepage": "https://github.com/poteto/ember-hypersearch",
+  "repository": "https://github.com/Artistan/ember-hypersearch",
+  "bugs": "https://github.com/Artistan/ember-hypersearch/issues",
+  "homepage": "https://github.com/Artistan/ember-hypersearch",
   "engines": {
     "node": ">= 0.10.0"
   },
