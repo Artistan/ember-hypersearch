@@ -49,3 +49,9 @@ test('it handles results', function(assert) {
     .assertClosureActionResultsLength('component-inline', 1);
 });
 
+test('it handles highlighting results with the arrow keys', function(assert) {
+  new MainPO(assert, { routeName: '/' })
+          .assertVisitUrl()
+          .searchForUserByName('component-inline', 'Miss')
+          .arrowDown('component-inline');
+});

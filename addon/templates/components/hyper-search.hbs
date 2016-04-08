@@ -2,16 +2,21 @@
   {{yield this}}
 {{else}}
   <form class="hypersearch" {{action "commit" on="submit"}}>
-    {{one-way-input
+    {{hypersearch-input
         class="hypersearch-input"
         name="query"
         type="text"
         placeholder=placeholder
         update=(action "search")
+        ondownarrow=(action "moveHighlightedResult" 1)
+        onuparrow=(action "moveHighlightedResult" -1)
     }}
     <ul class="hypersearch-results">
       {{#each results as |result|}}
-        <li class="hypersearch-result">
+        <li
+          class="hypersearch-result {{if result.isHighlighted 'highlight'}}"
+          {{action "highlightResult" result on="mouseEnter"}}
+        >
           <span {{action "selectResult" result on="click"}}>
             {{#if resultKey}}
               {{get result resultKey}}

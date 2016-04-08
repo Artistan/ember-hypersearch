@@ -18,6 +18,13 @@ export default class MainPO extends PageObject {
     });
   }
 
+  arrowDown(id) {
+    return this.then(() => {
+      const input = findWithAssert(`#${id} input`);
+      keyEvent(input, 'keyup', 40);
+    });
+  }
+
   assertResultLength(id, expectedLength) {
     return this.then(() => {
       this.assert.ok(find(`#${id} .hypersearch-results li`).length >= expectedLength, `it displays ${expectedLength} results`);

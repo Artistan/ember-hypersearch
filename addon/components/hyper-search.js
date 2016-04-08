@@ -146,6 +146,41 @@ export default Component.extend({
     }
   },
 
+  _getNext(increment) {
+    let results  = get(this, 'results');
+    let maxIndex = get(results, 'length') - 1;
+    if (maxIndex === -1) {
+      return null;
+    }
+
+    let nextIndex = increment === 1 ? 0 : maxIndex;
+    let limit     = increment === 1 ? maxIndex : 0;
+
+    results.any((result, i) => {
+      if (get(result, 'isHighlighted')) {
+        nextIndex = i === limit ? null : i + increment;
+        return true;
+      }
+    });
+
+    return results.objectAt(nextIndex);
+  },
+
+  highlightResult(resultToHighlight) {
+    if (!resultToHighlight) {
+      return;
+    }
+
+    get(this, 'results').any((result) => {
+      if (get(result, 'isHighlighted')) {
+        set(result, 'isHighlighted', false);
+        return true;
+      }
+    });
+
+    set(resultToHighlight, 'isHighlighted', true);
+  },
+
   actions: {
     search(_event, query) {
       debounce(this, '_search', query, get(this, 'debounceRate'), get(this, 'debounceAfter'));
@@ -153,6 +188,14 @@ export default Component.extend({
 
     selectResult(result) {
       this._handleAction('selectResult', result);
+    },
+
+    highlightResult(result) {
+      this.highlightResult(result);
+    },
+
+    moveHighlightedResult(increment) {
+      this.highlightResult(this._getNext(increment));
     }
   }
 });
