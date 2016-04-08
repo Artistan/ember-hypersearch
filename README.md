@@ -5,7 +5,7 @@
 
 Existing addons that implement real-time typeahead search assume that your app already has all the data. `ember-hypersearch` lets you query an endpoint directly, and caches results locally for better performance when the same query is repeated.
 
-If you provide the addon with data, it will use that directly and does fuzzy search to find the item. 
+If you provide the addon with data, it will use that directly and does fuzzy search to find the item.
 
 ## Compatibility
 
@@ -43,8 +43,8 @@ The component can also be used in block form, if you pass it a template:
   
   <form {{action "commit" on="submit"}}>
     {{one-way-input
-        name="query" 
-        type="text" 
+        name="query"
+        type="text"
         placeholder="Search for..."
         update=(action "search" target=hypersearch)
     }}
@@ -120,6 +120,12 @@ If a closure action / action name is passed to the component, the action will re
 Default: `null`
 
 If a closure action / action name is passed to the component, the action will receive the results of the query.
+
+### `loadingHandler: {Function|String}`
+
+Default: `null`
+
+A closure action / action name that will receive a boolean which states if results are being loaded/fetched.
 
 ## Roadmap
 

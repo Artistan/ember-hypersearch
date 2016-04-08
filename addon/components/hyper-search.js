@@ -61,6 +61,7 @@ export default Component.extend({
 
   cache(query, results) {
     set(this, keyForQuery(query), results);
+    this._handleAction('loadingHandler', false);
     return resolve(results);
   },
 
@@ -88,9 +89,16 @@ export default Component.extend({
       return reject();
     }
 
+    this._handleAction('loadingHandler', true);
+
     let cachedValue = this.getCacheForQuery(query);
 
-    return isPresent(cachedValue) ? resolve(cachedValue) : this.requestAndCache(...arguments);
+    if (isPresent(cachedValue)) {
+      this._handleAction('loadingHandler', false);
+      return resolve(cachedValue);
+    } else {
+      return this.requestAndCache(...arguments);
+    }
   },
 
   /**
