@@ -151,7 +151,6 @@ export default Component.extend({
     if (maxIndex === -1) {
       return null;
     }
-
     let nextIndex = increment === 1 ? 0 : maxIndex;
     let limit     = increment === 1 ? maxIndex : 0;
     if (Object.prototype.toString.call(results.any) === '[object Function]') {
@@ -183,8 +182,23 @@ export default Component.extend({
 
     set(resultToHighlight, 'isHighlighted', true);
   },
-
+  commitIt() {
+    let results = get(this, 'results');
+    if (Object.prototype.toString.call(results.any) === '[object Function]') {
+      results.any((result) => {
+        if (get(result, 'isHighlighted')) {
+          this._handleAction('selectResult', result);
+          return true;
+        }
+      });
+    }
+  },
   actions: {
+    commit() {
+      this.commitIt();
+      this._handleAction('commit');
+    },
+
     search(_event, query) {
       debounce(this, '_search', query, get(this, 'debounceRate'), get(this, 'debounceAfter'));
     },
