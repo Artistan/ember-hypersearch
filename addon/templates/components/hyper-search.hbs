@@ -10,6 +10,7 @@
         update=(action "search")
         ondownarrow=(action "moveHighlightedResult" 1)
         onuparrow=(action "moveHighlightedResult" -1)
+        onenter=(action "selectHighlightedResult")
     }}
     <ul class="hypersearch-results">
       {{#each results as |result|}}

@@ -7,6 +7,7 @@ export default OneWayInput.extend({
 
   KEY_EVENTS: {
     '38': 'onuparrow',
-    '40': 'ondownarrow'
+    '40': 'ondownarrow',
+    '13': 'onenter'
   }
 });

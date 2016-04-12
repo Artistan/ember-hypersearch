@@ -182,20 +182,20 @@ export default Component.extend({
 
     set(resultToHighlight, 'isHighlighted', true);
   },
-  commitIt() {
-    let results = get(this, 'results');
-    if (Object.prototype.toString.call(results.any) === '[object Function]') {
-      results.any((result) => {
-        if (get(result, 'isHighlighted')) {
-          this._handleAction('selectResult', result);
-          return true;
-        }
-      });
-    }
-  },
   actions: {
+    selectHighlightedResult() {
+      let results = get(this, 'results');
+      if (Object.prototype.toString.call(results.any) === '[object Function]') {
+        results.any((result) => {
+          if (get(result, 'isHighlighted')) {
+            this._handleAction('selectResult', result);
+            return false;// stop the "commit"
+          }
+        });
+      }
+    },
+
     commit() {
-      this.commitIt();
       this._handleAction('commit');
     },
 
