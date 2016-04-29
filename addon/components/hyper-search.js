@@ -46,6 +46,7 @@ export default Component.extend({
   endpoint: null,
   resultKey: null,
   placeholder: null,
+  scrollOffset: 0,
 
   init() {
     this._super(...arguments);
@@ -181,6 +182,18 @@ export default Component.extend({
     }
 
     set(resultToHighlight, 'isHighlighted', true);
+
+    // have jquery find and move the top position when arrowing down...
+    if(jQuery !== undefined){
+      var offset = get(this, 'scrollOffset');
+      var top = jQuery('.hypersearch-result.highlight').offset().top + offset;
+      if(top>0){
+        console.log('top',top, 'offset', offset);
+        jQuery('body,html').animate({
+          scrollTop: top
+        }, 50);
+      }
+    }
   },
   actions: {
     selectHighlightedResult() {

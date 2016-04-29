@@ -28,6 +28,7 @@ Then include the `hyper-search` component in a template of your choice:
     endpoint="/api/v1/users"
     resultKey="email"
     placeholder="Search by email"
+    scrollOffset=0
     selectResult=(action "selectResult")
     handleResults=(action "handleResults")
 }}
@@ -46,6 +47,7 @@ The component can also be used in block form, if you pass it a template:
         name="query"
         type="text"
         placeholder="Search for..."
+        scrollOffset=0
         update=(action "search" target=hypersearch)
     }}
     <ul>
@@ -108,6 +110,12 @@ Results of the current query are displayed in a `ul` element below the `input`. 
 Default: `null`
 
 An optional placeholder for the hypersearch input.
+
+### `scrollOffset: {Integer}`
+
+Default: `0`
+
+An optional offset for arrowed navigation for the hypersearch dropdown.
 
 ### `selectResult: {Function|String}`
 
