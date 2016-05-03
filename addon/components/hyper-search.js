@@ -184,14 +184,19 @@ export default Component.extend({
     set(resultToHighlight, 'isHighlighted', true);
 
     // have jquery find and move the top position when arrowing down...
+    /*
+    * var jQuery -- if defined.;
+    * */
     if(jQuery !== undefined){
       var offset = get(this, 'scrollOffset');
-      var top = jQuery('.hypersearch-result.highlight').offset().top + offset;
-      if(top>0){
-        console.log('top',top, 'offset', offset);
-        jQuery('body,html').animate({
-          scrollTop: top
-        }, 50);
+      var highlightOffset = jQuery('.hypersearch-result.highlight').offset();
+      if(highlightOffset){
+        var top = highlightOffset.top + offset;
+        if(top>0){
+          jQuery('body,html').animate({
+            scrollTop: top
+          }, 50);
+        }
       }
     }
   },
