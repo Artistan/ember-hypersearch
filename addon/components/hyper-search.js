@@ -190,7 +190,7 @@ export default Component.extend({
     if (jQuery !== undefined) {
       let offset = get(this, 'scrollOffset');
       let highlightOffset = jQuery('.hypersearch-result.highlight').offset();
-      if (highlightOffset){
+      if (highlightOffset) {
         let top = highlightOffset.top + offset;
         if (top > 0) {
           jQuery('body,html').animate({
